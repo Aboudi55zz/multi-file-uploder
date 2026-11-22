@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">FolderPush</string>
+    <string name="app_tagline">ارفع مجلدات الجوال مباشرة بدون حاسوب</string>
+    <string name="nav_upload">رفع مجلد</string>
+    <string name="nav_targets">الوجهات</string>
+    <string name="nav_history">السجل</string>
+    <string name="select_folder">اختيار مجلد من الجهاز</string>
+    <string name="change_folder">تغيير المجلد</string>
+    <string name="rescan_folder">إعادة الفحص</string>
+    <string name="start_upload">بدء رفع المجلد</string>
+    <string name="cancel_upload">إلغاء الرفع</string>
+    <string name="destination_github">GitHub</string>
+    <string name="destination_drive">Google Drive</string>
+    <string name="destination_web">أي موقع / API</string>
+    <string name="destination_zip">ضغط ZIP ومشاركة</string>
+    <string name="share_to_browser_label">رفع مجلد إلى هذا الموقع</string>
+    <string name="share_files_to_folderpush_label">إرسال أو رفع عبر FolderPush</string>
+    <string name="file_picker_bridge_label">FolderPush (كافة الملفات والمجلدات)</string>
+    <string name="sync_channel_progress_name">تقدم رفع المجلدات</string>
+    <string name="sync_channel_progress_desc">إشعار مستمر يتتبع تقدم مزامنة ورفع المجلدات في الخلفية</string>
+    <string name="sync_channel_result_name">نتائج رفع المجلدات</string>
+    <string name="sync_channel_result_desc">تنبيه عند اكتمال رفع المجلد أو توقفه</string>
+    <string name="sync_notification_cancel">إلغاء الرفع</string>
+</resources>

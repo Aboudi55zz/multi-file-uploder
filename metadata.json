@@ -1,0 +1,6 @@
+{
+  "name": "FolderPush",
+  "description": "Upload mobile folders directly to GitHub, Google Drive, WebDAV, custom HTTP endpoints, or ZIP archives without needing a PC.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
