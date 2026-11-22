@@ -29,21 +29,28 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "17"
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Configure Android SDK and accept licenses
+        run: |
+          SDK_DIR="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          echo "ANDROID_HOME=${SDK_DIR}" >> "$GITHUB_ENV"
+          SDK_MANAGER=$(find "${SDK_DIR}/cmdline-tools" -name sdkmanager -type f 2>/dev/null | head -n 1 || true)
+          if [ -n "${SDK_MANAGER}" ]; then
+            yes | "${SDK_MANAGER}" --licenses >/dev/null 2>&1 || true
+          fi
 
       - name: Setup Gradle 9.3.1
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v6
         with:
           gradle-version: "9.3.1"
+          cache-provider: basic
 
       - name: Prepare debug keystore and .env
         run: |
@@ -110,7 +117,7 @@ jobs:
           rm -f "${TEMP_KEYSTORE}"
 
       - name: Upload APK Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: FolderPush-APK
           path: apk-output/*.apk
@@ -119,7 +126,10 @@ jobs:
 
       - name: Attach APK to GitHub Release on version tags
         if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: apk-output/*.apk
-          generate_release_notes: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            --title "FolderPush ${GITHUB_REF_NAME}" \
+            --generate-notes \
+            apk-output/*.apk
